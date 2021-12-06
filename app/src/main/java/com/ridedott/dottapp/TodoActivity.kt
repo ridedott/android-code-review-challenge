@@ -10,7 +10,6 @@ class TodoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportFragmentManager.beginTransaction().replace(android.R.id.content, TodoFragment())
-            .commit()
+        supportFragmentManager.beginTransaction().replace(android.R.id.content, TodoFragment()).commit()
     }
 }
