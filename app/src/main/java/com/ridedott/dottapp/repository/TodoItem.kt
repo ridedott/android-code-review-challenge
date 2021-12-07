@@ -23,5 +23,4 @@ class TodoItem(val id: String, val title: String, val completed: Boolean) {
         result = 31 * result + completed.hashCode()
         return result
     }
-
 }
