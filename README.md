@@ -21,7 +21,7 @@
 ### `TodoRepository`
 1. Make it injectable 
 2. Inject JSON object instead of creating it 
-3. Inject OKHttp object instead of creating it 
+3. Inject OKHttp object instead of creating it
 
 # There are 5 bugs that were added intentionally that you can ask to spot and fix:
 1. If you open details and then click back, you will land on details again 
@@ -35,8 +35,16 @@
 5. App crashes if you open it without connectivity
    (Because we use !! in responses, to fix we need to check OkHttp code)
 
-# Script
+# Script:
    1. Walk candidate through the app
    2. Ask whats wrong with the app? (and categorize the issue by Performance, Best-Practices, Code Styles)
    3. Run app and spot the first issue 
    4. Ask to spot and fix the second issue
+   5. Ask candidate how would they test this app
+
+# Guideline to focus:
+  1. Overall knowledge of the candidate 
+  2. How well they can understand acrhitecture 
+  3. How easily they can spot issues or potential improvements 
+  4. How familiar they are with reactive programming 
+  5. Optionally we can ask for an opinion on testing and on Compose
