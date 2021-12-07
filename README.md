@@ -42,9 +42,9 @@
    4. Ask to spot and fix the second issue
    5. Ask candidate how would they test this app
 
-# Guideline to focus:
+# Guideline to focus on:
   1. Overall knowledge of the candidate 
-  2. How well they can understand acrhitecture 
+  2. How well they can understand architecture 
   3. How easily they can spot issues or potential improvements 
   4. How familiar they are with reactive programming 
   5. Optionally we can ask for an opinion on testing and on Compose
