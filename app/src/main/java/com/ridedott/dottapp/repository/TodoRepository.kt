@@ -1,14 +1,24 @@
 package com.ridedott.dottapp.repository
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import okhttp3.OkHttpClient
+import okhttp3.Request
+
 object TodoRepository {
 
-    fun getTodoList(): List<TodoItem> {
-        return mutableListOf<TodoItem>().apply {
-            add(TodoItem(TodoItemId("1"),"First todo item",  "And its description", "subdescription"))
-            add(TodoItem(TodoItemId("2"),"Second todo item",  "And its description", "subdescription"))
-            add(TodoItem(TodoItemId("3"),"Third todo item",  "And its description", "subdescription"))
-            add(TodoItem(TodoItemId("4"),"Forth todo item",  "And its description", "subdescription"))
-        }
+    fun getTodoList(): List<TodoListItem> {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url("https://jsonplaceholder.typicode.com/todos")
+            .build()
+
+        return Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        }.decodeFromString(
+            client.newCall(request).execute().body!!.string()
+        )
     }
 }
 

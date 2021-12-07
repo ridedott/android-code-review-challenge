@@ -4,35 +4,38 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import com.ridedott.dottapp.R
 import com.ridedott.dottapp.repository.TodoItem
-import com.ridedott.dottapp.repository.TodoItemId
-import dagger.hilt.android.AndroidEntryPoint
+import com.ridedott.dottapp.repository.TodoListItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
-class TodoDetailsFragment(val todoItem: TodoItem) : Fragment(R.layout.todo_details_fragment) {
+class TodoDetailsFragment(private val todoListItem: TodoListItem) :
+    Fragment(R.layout.todo_details_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.title).text = todoItem.title
-        view.findViewById<TextView>(R.id.description).text = todoItem.description
-        view.findViewById<TextView>(R.id.subdescription).text = todoItem.subdescription
 
         lifecycleScope.launch(Dispatchers.IO) {
             val client = OkHttpClient()
             val request = Request.Builder()
-                .url("https://jsonplaceholder.typicode.com/todos/${todoItem.id.value}")
+                .url("https://jsonplaceholder.typicode.com/todos/${todoListItem.id}")
                 .build()
 
-            val result = client.newCall(request).execute().body?.string()
+            val result: TodoItem =
+                Json {
+                    ignoreUnknownKeys = true
+                    isLenient = true
+                }.decodeFromString(client.newCall(request).execute().body!!.string())
 
             launch(Dispatchers.Main) {
-                view.findViewById<TextView>(R.id.dataFromBackend).text = result
+                view.findViewById<TextView>(R.id.title).text = result.title
+                view.findViewById<TextView>(R.id.isCompleted).text = result.completed.toString()
             }
         }
     }
