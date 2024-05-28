@@ -8,7 +8,7 @@ plugins {
 
 android {
     compileSdk 31
-    namespace = "come.ridedott.challenge"
+    namespace = "com.ridedott.dottapp"
 
     defaultConfig {
         applicationId 'com.ridedott.dottapp'
