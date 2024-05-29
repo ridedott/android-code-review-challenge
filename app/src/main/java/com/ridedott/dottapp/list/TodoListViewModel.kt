@@ -25,13 +25,15 @@ class TodoListViewModel @Inject constructor() : ViewModel() {
     private val _items = MutableStateFlow<List<TodoListItem>>(emptyList())
     val items : Flow<List<TodoListItem>> = _items.asStateFlow()
 
-    val NAVIGATE_TO = MutableLiveData<TodoListItem>()
+    private val _navigation = MutableStateFlow<Navigation?>(null)
+    val navigation = _navigation.asStateFlow()
+
 
     fun onClick(todoListItem: TodoListItem) {
-        NAVIGATE_TO.value = todoListItem
+        _navigation.value = Navigation.Detail(todoListItem.id)
     }
 }
 
 sealed interface Navigation {
-    data class Detail(val id: String)
+    data class Detail(val id: String) : Navigation
 }
