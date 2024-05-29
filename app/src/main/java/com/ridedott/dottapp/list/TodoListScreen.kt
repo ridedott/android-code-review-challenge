@@ -24,7 +24,9 @@ fun TodoListScreen(
     val items = viewModel.items.collectAsState(initial = emptyList())
 
     Column(modifier = Modifier.background(Color.White)) {
-        items.value.forEach { todoItem ->
+        items.value
+            .sortedBy { it.title }
+            .forEach { todoItem ->
             Row(modifier = Modifier
                 .padding(vertical = 16.dp)
                 .background(Color.Red)
