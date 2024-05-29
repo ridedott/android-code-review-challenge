@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 
 class TodoDetailsFragment(private val todoListItem: TodoListItem) :
-    Fragment(R.layout.todo_details_fragment) {
+    Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,10 +33,10 @@ class TodoDetailsFragment(private val todoListItem: TodoListItem) :
                     isLenient = true
                 }.decodeFromString(client.newCall(request).execute().body!!.string())
 
-            launch(Dispatchers.Main) {
-                view.findViewById<TextView>(R.id.title).text = result.title
-                view.findViewById<TextView>(R.id.isCompleted).text = result.completed.toString()
-            }
+//            launch(Dispatchers.Main) {
+//                view.findViewById<TextView>(R.id.title).text = result.title
+//                view.findViewById<TextView>(R.id.isCompleted).text = result.completed.toString()
+//            }
         }
     }
 }
